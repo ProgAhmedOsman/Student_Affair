@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>App.API</name>
+    </assembly>
+    <members>
+        <member name="M:App.Controllers.ClassRoomController.GetAllAsync(App.API.DTOs.PagingParameters)">
+             <summary>
+                   Get All ClassRooms
+             </summary>
+             <param name="PagingParametersDto"></param>
+             <returns>array of ClassRooms data in  requested page and return paging data in response header</returns>     
+            <response code="200">return all ClassRooms successfully</response>
+            <response code="401">user not authorized</response>
+        </member>
+        <member name="M:App.Controllers.ClassRoomController.PostAsync(System.String)">
+             <summary>
+                    Add new ClassRoom
+             </summary>
+             <param name="classRoomName"> class Room Name </param>
+             <returns>ActionResult</returns>
+            <response code="200">Succeeded</response>
+            <response code="201">Succeeded and return added entity</response>
+            <response code="400">BadRequest with error message</response>
+            <response code="401">user not authorized</response>
+        </member>
+        <member name="M:App.Controllers.StudentController.GetAllAsync(App.API.DTOs.PagingParameters)">
+             <summary>
+              Get All Students
+             </summary>
+             <param name="PagingParametersDto"></param>
+             <returns>array of Students data in  requested page and return paging data in response header</returns>     
+            <response code="200">return all Students successfully</response>
+            <response code="401">user not authorized</response>
+        </member>
+        <member name="M:App.Controllers.StudentController.PostAsync(App.API.DTOs.SaveStudentDTO)">
+            <summary>
+             Add new  Student 
+            </summary>
+            <param name="resource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:App.Controllers.SubjectController.GetAllAsync(App.API.DTOs.PagingParameters)">
+             <summary>
+                   Get All Subjects
+             </summary>
+             <param name="PagingParametersDto"></param>
+             <returns>array of Subjects data in  requested page and return paging data in response header</returns>     
+            <response code="200">return all Subjects successfully</response>
+            <response code="401">user not authorized</response>
+        </member>
+        <member name="M:App.Controllers.SubjectController.PostAsync(System.String)">
+             <summary>
+              Add new Subject
+             </summary>
+             <param name="subjectNAme"> subjectNAme </param>
+             <returns>ActionResult</returns>
+            <response code="200">Succeeded</response>
+            <response code="201">Succeeded and return added entity</response>
+            <response code="400">BadRequest with error message</response>
+            <response code="401">user not authorized</response>
+        </member>
+    </members>
+</doc>
