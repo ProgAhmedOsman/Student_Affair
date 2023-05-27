@@ -22,7 +22,7 @@ AutoMapper
 Dependency Injection 
 Swagger
 Repository pattern
-Onion Archetecture
+Onion architecture
 Clean COde 
 solid principles
 multi Layer architecture
