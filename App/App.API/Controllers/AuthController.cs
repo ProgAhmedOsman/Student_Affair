@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Auth")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
