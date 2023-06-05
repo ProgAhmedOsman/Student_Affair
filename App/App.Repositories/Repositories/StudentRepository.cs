@@ -28,6 +28,8 @@ namespace App.Repositories
 
             if (entity.Subjects.Any())
             {
+                ObjectToAdd.Subjects = new List<StudentSubject>();
+
                 ObjectToAdd.Subjects.AddRange(entity.Subjects.Select(c => new StudentSubject
                 {
 
