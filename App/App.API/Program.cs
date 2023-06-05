@@ -85,6 +85,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddSingleton<IVirtualFileProvider>(new VirtualFileProvider(builder.Configuration["PhysicalFilesUploadPath"]/*, env.EnvironmentName == "Development", env.ContentRootPath*/));
+
 builder.Services.AddSwaggerGen(c =>
                {
                    c.SchemaFilter<EnumSchemaFilter>();

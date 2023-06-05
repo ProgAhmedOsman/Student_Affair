@@ -19,7 +19,8 @@ using App.API.DTOs;
 using APP.Domain.DTOs;
 using App.API.Helper;
 using NuGet.Common;
-
+using Microsoft.Extensions.FileProviders;
+using App.Common.Extensions;
 namespace App.Controllers
 {
     [ApiController]
@@ -31,15 +32,17 @@ namespace App.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IStudentService _StudentService;
+        private readonly IVirtualFileProvider _fileProvider;
 
         private readonly IMapper _mapper;
-        public StudentController(ILogger<StudentController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IStudentService StudentService, IMapper mapper)
+        public StudentController(ILogger<StudentController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IStudentService StudentService, IMapper mapper, IVirtualFileProvider fileProvider)
         {
             _logger = logger;
             _signInManager = signInManager;
             _userManager = userManager;
             _StudentService = StudentService;
             _mapper = mapper;
+            _fileProvider = fileProvider;
         }
 
         /// <summary>
@@ -138,6 +141,56 @@ namespace App.Controllers
 
         }
 
+        /// <summary>
+        ///        Upload student profile Img  
+        /// </summary>
+        /// <param name="files">files to upload</param>
+        /// <returns>uploaded files names sperated by #</returns>
+        ///<response code="200">return uploaded files names sperated by #</response>
+        ///<response code="400">files not uploaded with error message</response>
+        ///<response code="401">user not authorized</response>
+        [HttpPost("UploadFiles")]
+        [AuthorizeApiUser(Roles = new[] { Roles.SuperAdmin })]
+        public async Task<IActionResult> UploadFilesAsync(List<IFormFile> files)
+        {
+
+            //if (files.Any(f => f.Length > 10485760)) return BadRequest(new { message = Resource.MaxFileSize });
+            if (!files.Any(f => f.Length > 0)) return BadRequest(new { message = "Invalid Input" });
+            var filesNames = new StringBuilder();
+            var fileName = "";
+
+            foreach (var formFile in files.Where(f => f.Length > 0))
+            {
+                fileName = formFile.FileName.UniqueCleanFileName();
+                var filePath = _fileProvider?.MapPath(Path.Combine(FilesUploadPaths.Students, fileName));
+                if (System.IO.File.Exists(filePath))
+                {
+                    fileName = fileName.UniqueCleanFileName();
+                    filePath = _fileProvider?.MapPath(Path.Combine(FilesUploadPaths.Students, fileName));
+                }
+                //if path not exist
+                
+                //string Path_ = _fileProvider?.MapPath(FilesUploadPaths.Students);
+                //if (!Directory.Exists(Path_))
+                //{
+                //    Directory.CreateDirectory(Path_);
+                //}
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await formFile.CopyToAsync(stream);
+                }
+                filesNames.Append("#" + fileName);
+
+            }
+
+            return Ok(new
+            {
+                FileName = filesNames.ToString(),
+                FilePath = string.IsNullOrWhiteSpace(filesNames.ToString()) ? null : FilesUploadPaths.Students + "/" + filesNames.Replace("#", ""),
+
+            });
+        }
 
     }
 }
