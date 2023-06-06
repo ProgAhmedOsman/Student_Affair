@@ -92,8 +92,9 @@ builder.Services.AddSwaggerGen(c =>
                    c.SchemaFilter<EnumSchemaFilter>();
 
                    c.SwaggerDoc("Auth", new OpenApiInfo { Title = "Auth", Version = "v1" });
-                   c.SwaggerDoc("Student", new OpenApiInfo { Title = "Student", Version = "v1" });
                    c.SwaggerDoc("ClassRoom", new OpenApiInfo { Title = "ClassRoom", Version = "v1" });
+                   c.SwaggerDoc("Files", new OpenApiInfo { Title = "Files", Version = "v1" });
+                   c.SwaggerDoc("Student", new OpenApiInfo { Title = "Student", Version = "v1" });
                    c.SwaggerDoc("Subject", new OpenApiInfo { Title = "Subject", Version = "v1" });
                    ////////setupAction.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
                    // Include 'SecurityScheme' to use JWT Authentication
@@ -139,6 +140,7 @@ if (app.Environment.IsDevelopment())
     {
         c.SwaggerEndpoint("/swagger/Auth/swagger.json", "Auth");
         c.SwaggerEndpoint("/swagger/ClassRoom/swagger.json", "ClassRoom");
+        c.SwaggerEndpoint("/swagger/Files/swagger.json", "Files");
         c.SwaggerEndpoint("/swagger/Student/swagger.json", "Student");
         c.SwaggerEndpoint("/swagger/Subject/swagger.json", "Subject");
 

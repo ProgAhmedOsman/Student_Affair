@@ -8,6 +8,7 @@ namespace App.Common.Enums
 {
     public static class FilesUploadPaths
     {
+        public const string InitialLocation = "FilesUpload/InitialLocation";
         public const string Students = "FilesUpload/Students";
     }
 }

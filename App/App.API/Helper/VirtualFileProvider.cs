@@ -1,4 +1,4 @@
-﻿ 
+﻿
 namespace App.API.Helper
 {
     public interface IVirtualFileProvider
@@ -13,13 +13,10 @@ namespace App.API.Helper
 
         // Map virtual directories
         private readonly Dictionary<string, string> _virtualDirectories = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { };
-        public VirtualFileProvider(string physicalFilesUploadPath )
+        public VirtualFileProvider(string physicalFilesUploadPath)
         {
 
-            //_rootPath = rootPath;
-            //if (!isDevelopmentEnvironment) 
-                
-                _virtualDirectories.Add("FilesUpload", physicalFilesUploadPath);
+            _virtualDirectories.Add("FilesUpload", physicalFilesUploadPath);
         }
         //public VirtualFileProvider(string physicalFilesUploadPath, bool isDevelopmentEnvironment, string rootPath)
         //{
