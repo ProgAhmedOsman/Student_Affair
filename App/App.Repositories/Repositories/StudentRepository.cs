@@ -94,6 +94,7 @@ namespace App.Repositories
             c.Status == EntityStatus.Active
             ).Select(c => new DisplayStudentDTO
             {
+                Key = c.Key,
                 Name = c.Name,
                 BirthDate = c.BirthDate,
                 Email = c.Email,

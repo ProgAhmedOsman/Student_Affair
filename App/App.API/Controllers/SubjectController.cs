@@ -51,7 +51,7 @@ namespace App.Controllers
         ///<response code="401">user not authorized</response>
         [HttpGet]
         [AuthorizeApiUser(Roles = new[] { Roles.SuperAdmin })]
-        public async Task<ActionResult<Api.DisplaySubjectDTO>> GetAllAsync([Required] Api.PagingParameters PagingParametersDto)
+        public async Task<ActionResult<Api.DisplaySubjectDTO>> GetAllAsync([FromQuery] Api.PagingParameters PagingParametersDto)
         {
             var data = await _SubjectService.GetAllSubjects(_mapper.Map<Domain.PagingParameters>(PagingParametersDto));
             var metadata = new

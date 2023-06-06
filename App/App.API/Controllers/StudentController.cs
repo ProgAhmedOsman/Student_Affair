@@ -54,7 +54,7 @@ namespace App.Controllers
         ///<response code="401">user not authorized</response>
         [HttpGet]
         [AuthorizeApiUser(Roles = new[] { Roles.SuperAdmin })]
-        public async Task<ActionResult<Api.DisplayStudentDTO>> GetAllAsync(Api.PagingParameters PagingParametersDto)
+        public async Task<ActionResult<Api.DisplayStudentDTO>> GetAllAsync([FromQuery] Api.PagingParameters PagingParametersDto)
         {
             var data = await _StudentService.GetAllStudents(_mapper.Map<Domain.PagingParameters>(PagingParametersDto));
             var metadata = new
@@ -169,7 +169,7 @@ namespace App.Controllers
                     filePath = _fileProvider?.MapPath(Path.Combine(FilesUploadPaths.Students, fileName));
                 }
                 //if path not exist
-                
+
                 //string Path_ = _fileProvider?.MapPath(FilesUploadPaths.Students);
                 //if (!Directory.Exists(Path_))
                 //{

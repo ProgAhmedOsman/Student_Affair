@@ -9,7 +9,7 @@ namespace APP.Domain.DTOs
     public class DisplayStudentDTO
     {
 
-        public Guid Id { get; set; }
+        public Guid Key { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime BirthDate { get; set; }

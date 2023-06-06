@@ -51,7 +51,7 @@ namespace App.Controllers
         ///<response code="401">user not authorized</response>
         [HttpGet]
         [AuthorizeApiUser(Roles = new[] { Roles.SuperAdmin })]
-        public async Task<ActionResult<Api.DisplayClassRoomDTO>> GetAllAsync([Required] Api.PagingParameters PagingParametersDto)
+        public async Task<ActionResult<Api.DisplayClassRoomDTO>> GetAllAsync([FromQuery] Api.PagingParameters PagingParametersDto)
         {
             var data = await _ClassRoomService.GetAllClassRooms(_mapper.Map<Domain.PagingParameters>(PagingParametersDto));
             var metadata = new
