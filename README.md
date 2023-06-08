@@ -1,1 +1,31 @@
 # Student_Affair
+
+
+
+====================
+
+studentAfair projct 
+userName:Admin@Admin.com
+password :passW@rd123
+====================
+1- update data base command 
+2- insert subjects
+2- insert classs
+3 insert/update/getAll/Delete student
+=====================================
+Technologies
+
+Asp.net core 7
+EntitrameWorkCore 7
+Identity (Role Base Permission )
+JWT with (getTocken, RefreshTocken ,RevkeToken  )
+ResfFull APIs
+AutoMapper
+Dependency Injection 
+Swagger
+Repository pattern
+Onion architecture
+Clean COde 
+solid principles
+multi Layer architecture
+Data transfer Object 
