@@ -21,6 +21,29 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container. ( configure services )
 
 #region configure_services
+#region Cors 
+
+//enable cors origin to accept any request from any calller
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyCorsPolicy",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+// to customize 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddDefaultPolicy(builder =>
+//    {
+//        builder.WithOrigins("http://localhost:4200")
+//               .AllowAnyHeader()
+//               .AllowAnyMethod();
+//    });
+//});
+//then use this 
+// app.UseCors();
+#endregion
 
 builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
@@ -52,7 +75,6 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ISubjectService, SubjectService>();
 builder.Services.AddTransient<IClassRoomService, ClassRoomService>();
 builder.Services.AddTransient<IUserService, UserService>();
-
 
 
 
@@ -131,6 +153,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline. (configure) 
 #region configure
 
+app.UseCors("MyCorsPolicy");
 
 if (app.Environment.IsDevelopment())
 {
