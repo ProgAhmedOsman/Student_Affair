@@ -117,7 +117,7 @@ namespace App.Controllers
         /// <param name="studentkey"> student key</param>
         /// <param name="resource"> Save Student DTO</param>
         /// <returns></returns>
-        [HttpPut("{studentkey}")]
+        [HttpPut("UpdateStudents_UsingLock/{studentkey}")]
         [AuthorizeApiUser(Roles = new[] { Roles.SuperAdmin })]
         public async Task<ActionResult<Api.SaveStudentDTO>> UpdateStudents_UsingLock(Guid studentkey, Api.SaveStudentDTO resource)
         {
