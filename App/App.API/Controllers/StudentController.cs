@@ -98,7 +98,7 @@ namespace App.Controllers
         /// <param name="studentkey"> student key</param>
         /// <param name="resource"> Save Student DTO</param>
         /// <returns></returns>
-        [HttpPut("{Studentkey}")]
+        [HttpPut("{studentkey}")]
         [AuthorizeApiUser(Roles = new[] { Roles.SuperAdmin })]
         public async Task<ActionResult<Api.SaveStudentDTO>> PutAsync(Guid studentkey, Api.SaveStudentDTO resource)
         {
@@ -108,9 +108,33 @@ namespace App.Controllers
             var result = await _StudentService.UpdateStudentAsync(studentkey, _mapper.Map<Domain.SaveStudentDTO>(resource));
             if (!result.Success)
                 return BadRequest(new { message = result.Message });
-            return Created("Student Updated Successfully ", result.Entity);
+            var x = _mapper.Map<Api.SaveStudentDTO>(result.Entity);
+            return Created("Student Updated Successfully ", x);
         }
+        /// <summary>
+        ///  Add new  Student 
+        /// </summary>
+        /// <param name="studentkey"> student key</param>
+        /// <param name="resource"> Save Student DTO</param>
+        /// <returns></returns>
+        [HttpPut("{studentkey}")]
+        [AuthorizeApiUser(Roles = new[] { Roles.SuperAdmin })]
+        public async Task<ActionResult<Api.SaveStudentDTO>> UpdateStudents_UsingLock(Guid studentkey, Api.SaveStudentDTO resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = ModelState.GetErrorMessages().Aggregate((p, n) => p + ", " + n) });
 
+            var result = await _StudentService.UpdateStudentAsync_Lock(studentkey, _mapper.Map<Domain.SaveStudentDTO>(resource));
+            //apply Distributed lock 
+            //  Task task1 = Task.Run(async () => _StudentService.UpdateStudentAsync_Lock(studentkey, _mapper.Map<Domain.SaveStudentDTO>(resource)));
+            //  Task task2 = Task.Run(async () =>  _StudentService.UpdateStudentAsync_Lock(studentkey, _mapper.Map<Domain.SaveStudentDTO>(resource)));
+            //  await Task.WhenAll(task1, task2);
+
+            if (!result.Success)
+                return BadRequest(new { message = result.Message });
+            var x = _mapper.Map<Api.SaveStudentDTO>(result.Entity);
+            return Created("Student Updated Successfully ", x);
+        }
 
 
         /// <summary>

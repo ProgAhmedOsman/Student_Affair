@@ -62,11 +62,12 @@ namespace App.Repositories
                 if (ObjectToEdit.Subjects.Any())
                 {
                     _context.Set<StudentSubject>().RemoveRange(ObjectToEdit.Subjects);
+                    ObjectToEdit.Subjects = new List<StudentSubject>();
                 }
 
                 if (entity.Subjects.Any())
                 {
-                    ObjectToEdit.Subjects.AddRange(entity.Subjects.Select(c => new StudentSubject
+                    _context.Set<StudentSubject>().AddRange(entity.Subjects.Select(c => new StudentSubject
                     {
 
                         Key = Guid.NewGuid(),
@@ -76,10 +77,10 @@ namespace App.Repositories
                         ModifiedDate = DateTime.Now,
                         Status = EntityStatus.Active
 
-                    }).ToList()); ;
+                    }).ToList()); 
 
                 }
-                var result = entities.Add(ObjectToEdit);
+                //var result = entities.Add(ObjectToEdit);
                 await _context.SaveChangesAsync();
                 return entity;
             }

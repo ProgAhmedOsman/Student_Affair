@@ -37,6 +37,7 @@
     <ProjectReference Include="..\APP.Domain\APP.Domain.csproj" />
     <ProjectReference Include="..\App.Repositories\App.Repositories.csproj" />
     <ProjectReference Include="..\App.Services\App.Services.csproj" />
+    <ProjectReference Include="..\APP.SharedKernel\APP.SharedKernel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

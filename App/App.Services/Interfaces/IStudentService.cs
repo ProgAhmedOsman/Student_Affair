@@ -8,7 +8,10 @@ namespace App.Service
     {
 
         Task<ActionResponse<SaveStudentDTO>> AddStudentAsync(SaveStudentDTO entity);
-        Task<ActionResponse<Student>> UpdateStudentAsync(Guid studentKey, SaveStudentDTO entity);
+        Task<ActionResponse<SaveStudentDTO>> UpdateStudentAsync(Guid studentKey, SaveStudentDTO entity);
+        Task<ActionResponse<SaveStudentDTO>> UpdateStudentAsync_Lock(Guid studentKey, SaveStudentDTO entity);
+
+
         Task<ActionResponse<Student>> DeleteStudentAsync(Guid studentKey);
         Task<PagedList<DisplayStudentDTO>> GetAllStudents(PagingParameters pagingParameters);
 

@@ -7,9 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APP.Domain\APP.Domain.csproj" />
-    <ProjectReference Include="..\App.Repositories\App.Repositories.csproj" />
-    <ProjectReference Include="..\APP.SharedKernel\APP.SharedKernel.csproj" />
+    <PackageReference Include="DistributedLock.Core" Version="1.0.5" />
+    <PackageReference Include="DistributedLock.SqlServer" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

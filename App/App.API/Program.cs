@@ -15,6 +15,10 @@ using System.Net;
 using App.API.Helper;
 using System.Reflection;
 using App.API.Models;
+using System.Configuration;
+using APP.SharedKernel.DistributedLock.DistributedLock.Sql.Clients;
+using APP.SharedKernel.DistributedLock.DistributedLock.Sql.Contracts;
+using APP.SharedKernel.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +62,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+# region DistributedLock Configuration 
+builder.Services.AddSingleton(builder.Configuration.GetSection(AppSetingKeyConstanta.SqlDistributedLockSection).Get<DistributedLockConfiguration>());
+builder.Services.AddScoped<IDistributedLockClient, DistributedLockClient>();
+# endregion
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
