@@ -19,6 +19,7 @@ using System.Configuration;
 using APP.SharedKernel.DistributedLock.DistributedLock.Sql.Clients;
 using APP.SharedKernel.DistributedLock.DistributedLock.Sql.Contracts;
 using APP.SharedKernel.Constants;
+using App.API.CustumeMiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -163,6 +164,7 @@ var app = builder.Build();
 
 app.UseCors("MyCorsPolicy");
 
+app.UseUrlEncodingMiddleware();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
